@@ -28,6 +28,7 @@ import static com.imstuding.www.handwyu.WidgetSmall.MyCourseWidgetSmall.WIDGET_U
  */
 public class MyCourseWidgetBig extends AppWidgetProvider {
 
+    public static final String MY_PACKAGE_NAME = "com.imstuding.simple.handwyu";
     final int[]  w_z={R.id.w_qi,R.id.w_yi,R.id.w_er,R.id.w_san,R.id.w_si,R.id.w_wu,R.id.w_liu};
     public static final String CHANGE_IMAGE = "com.imstuding.www.handwyu.Widget.action.CHANGE_IMAGE";
     private Intent startUpdateIntent=null;
@@ -96,7 +97,7 @@ public class MyCourseWidgetBig extends AppWidgetProvider {
             String content=intent.getStringExtra("content");
             if (!content.isEmpty()){
                 Intent startAcIntent = new Intent();
-                startAcIntent.setComponent(new ComponentName("com.imstuding.www.handwyu","com.imstuding.www.handwyu.MainUi.MainActivity"));//第一个是包名，第二个是类所在位置的全称
+                startAcIntent.setComponent(new ComponentName(MY_PACKAGE_NAME,"com.imstuding.www.handwyu.MainUi.MainActivity"));//第一个是包名，第二个是类所在位置的全称
                 startAcIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(startAcIntent);
             }

@@ -27,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/home_shape"
-                android:clickable="true">
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -42,7 +43,7 @@
                     android:gravity="center"
                     android:text="内网功能"
                     android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <TextView
@@ -57,7 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/home_shape"
-                android:clickable="true">
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -72,7 +74,7 @@
                     android:gravity="center"
                     android:text="上课提醒"
                     android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <TextView
@@ -87,7 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/home_shape"
-                android:clickable="true">
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -121,7 +124,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/home_shape"
-            android:clickable="true">
+            android:clickable="true"
+            android:focusable="true">
 
 
             <ImageView
@@ -137,7 +141,7 @@
                 android:gravity="center"
                 android:text="检测更新"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/home_textview_update"
@@ -151,7 +155,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/home_shape"
-            android:clickable="true">
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:layout_width="30dp"

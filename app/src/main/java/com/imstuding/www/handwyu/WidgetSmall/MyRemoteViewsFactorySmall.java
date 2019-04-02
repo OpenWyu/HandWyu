@@ -39,7 +39,6 @@ public class MyRemoteViewsFactorySmall implements RemoteViewsService.RemoteViews
         columnTotal=7;
         rowTotal=6;
         mContext = context;
-
     }
 
 

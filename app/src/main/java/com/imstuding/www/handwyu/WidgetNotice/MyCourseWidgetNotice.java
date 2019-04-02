@@ -15,7 +15,6 @@ import com.imstuding.www.handwyu.R;
 import com.imstuding.www.handwyu.BuildConfig;
 import com.imstuding.www.handwyu.ToolUtil.DatabaseHelper;
 import com.imstuding.www.handwyu.ToolUtil.NoticeUtil;
-import com.imstuding.www.handwyu.WidgetSmall.MyCourseWidgetSmall;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,6 +27,8 @@ import static com.imstuding.www.handwyu.ToolUtil.DatabaseHelper.db_version;
  * Implementation of App Widget functionality.
  */
 public class MyCourseWidgetNotice extends AppWidgetProvider {
+    public static final String MY_PACKAGE_NAME = "com.imstuding.simple.handwyu";
+    public static final String WIDGET_UPDATE = "com.imstuding.www.handwyu.Widget.action.WIDGET_UPDATE";
     public static final String LIST_ACTION = "Widget.Button.list.Click";
     public static final String WIDGET_PREV = "Widget.Button.prev.Click";
     public static final String WIDGET_NEXT = "Widget.Button.next.Click";
@@ -59,7 +60,7 @@ public class MyCourseWidgetNotice extends AppWidgetProvider {
 
         Intent refreshIntent = new Intent(context, MyCourseWidgetNotice.class);
 
-        refreshIntent.setAction(MyCourseWidgetSmall.WIDGET_UPDATE);
+        refreshIntent.setAction(WIDGET_UPDATE);
         views.setOnClickPendingIntent(R.id.widget_notice_refresh, PendingIntent.getBroadcast(context, 0, refreshIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
         views.setRemoteAdapter(R.id.widget_notice_list, new Intent(context, MyRemoteViewsServiceNotice.class));
@@ -94,29 +95,30 @@ public class MyCourseWidgetNotice extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action != null) {
-            Date date = new Date();
             Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
+            cal.setTime(nowDate);
 
             switch (action) {
                 case LIST_ACTION:
                     Intent startAcIntent = new Intent();
-                    startAcIntent.setComponent(new ComponentName("com.imstuding.www.handwyu", "com.imstuding.www.handwyu.MainUi.MainActivity"));
+                    startAcIntent.setComponent(new ComponentName(MY_PACKAGE_NAME, "com.imstuding.www.handwyu.MainUi.MainActivity"));
                     startAcIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(startAcIntent);
                     break;
                 case WIDGET_PREV:
                     cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) - 1);
-                    date = cal.getTime();
-                    reFresh(context, date);
+                    nowDate = cal.getTime();
+                    reFresh(context, nowDate);
                     break;
                 case WIDGET_NEXT:
                     cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + 1);
-                    date = cal.getTime();
-                    reFresh(context, date);
+                    nowDate = cal.getTime();
+                    reFresh(context, nowDate);
                     break;
-                case MyCourseWidgetSmall.WIDGET_UPDATE:
-                    reFresh(context, date);
+                case WIDGET_UPDATE:
+                    cal.setTime(new Date());
+                    nowDate = cal.getTime();
+                    reFresh(context, nowDate);
                     break;
             }
         }
@@ -156,7 +158,7 @@ public class MyCourseWidgetNotice extends AppWidgetProvider {
     public int getListNotice(Context context, Date date) {
         SQLiteDatabase db = new DatabaseHelper(context, "course.db", null, db_version).getReadableDatabase();
         int count = 0;
-        String zc = getWeek(date, context);
+        String zc = getWeek(context, date);
         if (zc == null) {
             return 0;
         }
@@ -185,7 +187,7 @@ public class MyCourseWidgetNotice extends AppWidgetProvider {
     }
 
 
-    public String getWeek(Date d, Context context) {
+    public String getWeek(Context context, Date d) {
         DatabaseHelper dbhelp = new DatabaseHelper(context, "course.db", null, db_version);
         SQLiteDatabase db = dbhelp.getReadableDatabase();
 

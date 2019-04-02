@@ -48,7 +48,6 @@ public class HomeFragment extends Fragment {
     private View view = null;
     private LinearLayout layout_update = null;
     private LinearLayout layout_intranet = null;
-    private LinearLayout layout_second_simple = null;
     private LinearLayout layout_logout = null;
     private LinearLayout layout_notice_widget = null;
     private LinearLayout layout_more = null;
@@ -95,16 +94,21 @@ public class HomeFragment extends Fragment {
 
         layout_shool_date = view.findViewById(R.id.layout_shool_date);
         layout_shool_date.setOnClickListener(myClickListener);
+
         layout_more = view.findViewById(R.id.layout_more);
         layout_more.setOnClickListener(myClickListener);
+
         layout_update = view.findViewById(R.id.layout_update);
         layout_update.setOnClickListener(myClickListener);
-        layout_notice_widget = view.findViewById(R.id.layout_notice_widget);
-        layout_intranet = view.findViewById(R.id.layout_intranet);
+
+
         layout_logout = view.findViewById(R.id.layout_logout);
         layout_logout.setOnClickListener(myClickListener);
-        layout_second_simple.setOnClickListener(myClickListener);
+
+        layout_intranet = view.findViewById(R.id.layout_intranet);
         layout_intranet.setOnClickListener(myClickListener);
+
+        layout_notice_widget = view.findViewById(R.id.layout_notice_widget);
         layout_notice_widget.setOnClickListener(myClickListener);
 
         reFresh();
